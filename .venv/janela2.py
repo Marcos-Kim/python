@@ -37,9 +37,60 @@ class Janela2(QWidget):
         # apresentar o texto "Nome Completo", isso indica ao usuário que ele deve escrever o nome em uma
         # caixa de texto à frente. Geralmente, uma label é usada em combinação com uma caixa de texto (QLineEdit).
         self.label_nome = QLabel("Nome completo:")
+        # Para alterar o estilo do texto da label, usamos os comandos de CSS (Cascade Style Sheet) com as propriedades:
+        # - color -> cor da letra (cor da fonte)
+        # - font-size -> tamanho da letra, que pode ser medida em pt (pontos)
+        # - font-weight -> peso da fonte (Negrito: bold)
+        # - text-transform -> alterar a altura da caixa (letra): UpperCase -> maiúscula / LowerCase -> minúscula /
+        # Captalize -> primeira letra de cada palavra maiúscula
+        self.label_nome.setStyleSheet("QLabel{color:#ff0000;font-size:12pt;font-weight:bold;text-transform:upperCase}")
+
+        self.label_email = QLabel("E-mail:")
+        self.label_email.setStyleSheet("QLabel{color:#ff0000;font-size:12pt;font-weight:bold;text-transform:upperCase}")
+        
+        self.label_cpf = QLabel("CPF:")
+        self.label_cpf.setStyleSheet("QLabel{color:#ff0000;font-size:12pt;font-weight:bold;text-transform:upperCase}")
+        
+        self.label_sexo = QLabel("Sexo:")
+        self.label_sexo.setStyleSheet("QLabel{color:#ff0000;font-size:12pt;font-weight:bold;text-transform:upperCase}")
+
+        self.label_idade = QLabel("Idade:")
+        self.label_idade.setStyleSheet("QLabel{color:#ff0000;font-size:12pt;font-weight:bold;text-transform:upperCase}")
 
         # Adicionar uma caixa de texto
         self.edit_nome = QLineEdit()
+        # Aplicação do estilo para a caixa de texto:
+        # background-color -> cor de fundo
+        # padding -> margem interna, ou seja, dentro da caixa
+        # border-radius -> arredondar os cantos da caixa de texto
+        self.edit_nome.setStyleSheet("QLineEdit{background-color:#999; color:#fff; padding:10px; border-radius:10px}")
+
+        self.edit_email = QLineEdit()
+        self.edit_email.setStyleSheet("QLineEdit{background-color:#999; color:#fff; padding:10px; border-radius:10px}")
+
+        self.edit_cpf = QLineEdit()
+        self.edit_cpf.setStyleSheet("QLineEdit{background-color:#999; color:#fff; padding:10px; border-radius:10px}")
+
+        # Adicionar combobox
+        self.combo_sexo = QComboBox()
+        self.combo_sexo.setStyleSheet("QComboBox{background-color:#999; color:#fff; padding:10px; border-radius:10px}")
+
+        self.combo_idade = QComboBox()
+        self.combo_idade.setStyleSheet("QComboBox{background-color:#999; color:#fff; padding:10px; border-radius:10px}")
+
+        # Criar uma lista com 3 sexos
+        lst_sexo = ["Masculino", "Feminino","Outros"]
+        # Adicionar a lista a combo_sexo
+        self.combo_sexo.addItems(lst_sexo)
+
+        # Criar uma lista para o combo_idade que vai de 16 a 100 anos
+        lst_idade = []
+        # Para popular a caixa(combobox) da idade com valores de 16 até 100, estamos usando uma estrutura de repetição
+        # que faz uma contagem de 16 a 101 com o comando "range". Durante a contagem, cada número é convertido para 
+        # string, pois a combobox só aceita lista de valores em formato de texto (string)
+        for i in range(16,101):
+            lst_idade.append(str(i))
+        self.combo_idade.addItems(lst_idade)
 
         # Adicionar layout para organizar os elementos
         # Estamos usando o gerenciador de layout vertical (QVBoxLayout)
@@ -54,10 +105,27 @@ class Janela2(QWidget):
         layout.addWidget(self.label_nome)
         layout.addWidget(self.edit_nome)
 
+        layout.addWidget(self.label_email)
+        layout.addWidget(self.edit_email)
+
+        layout.addWidget(self.label_cpf)
+        layout.addWidget(self.edit_cpf)
+
+        layout.addWidget(self.label_sexo)
+        layout.addWidget(self.combo_sexo)
+
+        layout.addWidget(self.label_idade)
+        layout.addWidget(self.combo_idade)
+
         # Adicionar o layout à tela
         self.setLayout(layout)
 
+# Criando um objeto chamado app do QApplication (Responsável por todo o comportamento da nossa aplicação). 
+# O argumento sys.argv: informa ao sistema operacional que uma aplicação será carregada e estará presente em memória.
 app = QApplication(sys.argv)
+# Inicia a tela, ou seja, carrega a janela em memória.
 jan = Janela2()
+# Exibe a janela em tela.
 jan.show()
+# O comando app.exec_, executa todos os comandos acima e gerecia o botão de fechar para retirar a janela de memória quando for acionado.
 app.exec_()
